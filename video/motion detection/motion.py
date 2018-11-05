@@ -49,6 +49,7 @@ while True:
     # Append status to status_list
     # If status has changed since last frame, add timestamp to list
     status_list.append(status)
+    status_list = status_list[-2:]
     if status_list[-1] == 1 and status_list[-2] == 0:
         time_list.append(datetime.now())
     if status_list[-1] == 0 and status_list[-2] == 1:
@@ -73,7 +74,7 @@ for i in range(0, len(time_list), 2):
     df = df.append({"Start":time_list[i], "End":time_list[i+1]}, ignore_index = True)
 
 # Write to file
-df.to_csv("Timestamps.csv")
+df.to_csv("Timestamps.csv",)
 
 # Release the camera and close windows
 video.release()
